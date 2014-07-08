@@ -18,16 +18,16 @@ public class MaterialServiceImpl implements MaterialService {
 
     @Override
     public Iterable<Material> findAll() {
-        return repository.findAll();
+        return this.repository.findAll();
     }
 
     @Override
     public Material findItemById(final String materialId) {
-        return repository.findItemById(materialId);
+        return this.repository.findItemById(materialId);
     }
 
     @Override
     public Material save(final Material material) {
-        return repository.save(material);
+        return this.repository.save(material);
     }
 }

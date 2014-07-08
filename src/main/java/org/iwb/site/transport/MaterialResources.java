@@ -1,7 +1,6 @@
 package org.iwb.site.transport;
 
 import org.iwb.site.bo.Material;
-import org.iwb.site.bo.PageDataHolder;
 import org.iwb.site.service.MaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,0 +1,420 @@
+[
+    {
+        "barcode": "5410041143508",
+        "name": "TUC Bacon",
+        "components": [
+            {
+                "name": "Emballage plastique",
+                "materialId": "NON-RECYCLABLE"
+            }
+        ]
+    },
+    {
+        "barcode": "3121970125894",
+        "name": "Fertiligène FOURMIS - Anti fourmis Fertiligène",
+        "components": [
+            {
+                "name": "Emballage carton",
+                "materialId": "PAPER"
+            },
+            {
+                "name": "Boitier anti fourmis",
+                "materialId": "TOXIC"
+            }
+        ]
+    },
+    {
+        "barcode": "3037922060093",
+        "name": "Bloc notes Rodia A4",
+        "materialId": "PAPER"
+    },
+    {
+        "barcode": "3288131500034",
+        "name": "Lait pour bébé babybio Otptima",
+        "components": [
+            {
+                "name": "Pot métal",
+                "materialId": "METAL"
+            },
+            {
+                "name": "Couvercle plastique",
+                "materialId": "NON-RECYCLABLE"
+            },
+            {
+                "name": "Cuillère plastique",
+                "materialId": "NON-RECYCLABLE"
+            }
+        ]
+    },
+    {
+        "barcode": "3700425903951",
+        "name": "Masque de chirurgie à élastiques",
+        "components": [
+            {
+                "name": "Emballage carton",
+                "materialId": "PAPER"
+            },
+            {
+                "name": "Feuillet de protection",
+                "materialId": "PAPER"
+            },
+            {
+                "name": "Masque chirugicale",
+                "materialId": "NON-RECYCLABLE"
+            }
+        ]
+    },
+    {
+        "barcode": "3080210007829",
+        "name": "Pack de bière Grimbergen blonde",
+        "components": [
+            {
+                "name": "Emballage carton",
+                "materialId": "PAPER"
+            },
+            {
+                "name": "Bouteille en verre",
+                "materialId": "GLASS"
+            },
+            {
+                "name": "Capsule",
+                "materialId": "METAL"
+            }
+        ]
+    },
+    {
+        "barcode": "3400932913282",
+        "name": "Flacon de biseptine",
+        "materialId": "MEDICAL"
+    },
+    {
+        "barcode": null,
+        "name": "Smarties",
+        "components": [
+            {
+                "name": "Emballage plastique",
+                "materialId": "NON-RECYCLABLE"
+            },
+            {
+                "name": "Emballage carton",
+                "materialId": "PAPER"
+            }
+        ]
+    },
+    {
+        "barcode": "3256222978093",
+        "name": "Cubi côtes du Rohne Super U",
+        "components": [
+            {
+                "name": "Emballage carton",
+                "materialId": "CARTON"
+            },
+            {
+                "name": "Poche",
+                "materialId": "NON-RECYCLABLE"
+            }
+        ]
+    },
+    {
+        "barcode": "3065890102804",
+        "name": "Paté pour chat Whiskas",
+        "materialId": "METAL"
+    },
+    {
+        "barcode": "3179756031792",
+        "name": "Pack bouteilles d'eau minérale Plancoët",
+        "components": [
+            {
+                "name": "Emballage plastique",
+                "materialId": "NON-RECYCLABLE"
+            },
+            {
+                "name": "6x 3179730100742",
+                "materialId": "REFERENCE"
+            }
+        ]
+    },
+    {
+        "barcode": "3179730100742",
+        "name": "Bouteille d'eau minérale Plancoët",
+        "materialId": "PLASTIC"
+    },
+    {
+        "barcode": "3256227420023",
+        "name": "Litière pour chat micro-agglomérante Super U",
+        "components": [
+            {
+                "name": "Litière",
+                "materialId": "NON-RECYCLABLE"
+            },
+            {
+                "name": "Emballage carton",
+                "materialId": "PAPER"
+            }
+        ]
+    },
+    {
+        "barcode": "325622645575",
+        "name": "Litière végétale pour chat haute absorption Super U",
+        "components": [
+            {
+                "name": "Litière",
+                "materialId": "COMPOST"
+            },
+            {
+                "name": "Emballage papier",
+                "materialId": "PAPER"
+            }
+        ]
+    },
+    {
+        "barcode": "3049580530160",
+        "name": "Choucroute garnie William SAURIN 400g",
+        "materialId": "METAL"
+    },
+    {
+        "barcode": null,
+        "name": "Prospectus",
+        "materialId": "PAPER"
+    },
+    {
+        "barcode": null,
+        "name": "Publicité papier",
+        "materialId": "PAPER"
+    },
+    {
+        "barcode": "3288131500201",
+        "name": "Boudoirs babybio",
+        "components": [
+            {
+                "name": "Emballage carton",
+                "materialId": "PAPER"
+            },
+            {
+                "name": "Emballage individuelle plastique",
+                "materialId": "PLASTIC"
+            }
+        ]
+    },
+    {
+        "barcode": null,
+        "name": "Mobile Samsung Galaxy S2",
+        "materialId": "ELECTRONIC"
+    },
+    {
+        "barcode": null,
+        "name": "Mobile Nexus 5",
+        "materialId": "ELECTRONIC"
+    },
+    {
+        "barcode": null,
+        "name": "Sac à pain",
+        "components": [
+            {
+                "name": "Pain",
+                "materialId": "COMPOST"
+            },
+            {
+                "name": "Sac en papier",
+                "materialId": "PAPER"
+            }
+        ]
+    },
+    {
+        "barcode": "541004142805",
+        "name": "PRINCE goût chocolat",
+        "components": [
+            {
+                "name": "Etui plastique",
+                "materialId": "NON-RECYCLABLE"
+            },
+            {
+                "name": "Etui papier",
+                "materialId": "PAPER"
+            }
+        ]
+    },
+    {
+        "barcode": "5061990140654",
+        "name": "BN goût chocolat",
+        "components": [
+            {
+                "name": "Etui plastique",
+                "materialId": "NON-RECYCLABLE"
+            },
+            {
+                "name": "Etui papier",
+                "materialId": "PAPER"
+            }
+        ]
+    },
+    {
+        "barcode": "3061990140692",
+        "name": "Lot de 3 paquets de BN goût chocolat",
+        "components": [
+            {
+                "name": "3x 5061990140654",
+                "materialId": "REFERENCE"
+            }
+        ]
+    },
+    {
+        "barcode": "834554004654",
+        "name": "Allume feux naturels ZIP",
+        "components": [
+            {
+                "name": "Emballage carton",
+                "materialId": "PAPER"
+            }
+        ]
+    },
+    {
+        "barcode": "8002270014901",
+        "name": "Bouteille eau pétillante SAN PELLEGRINO",
+        "materialId": "PLASTIC"
+    },
+    {
+        "barcode": "3660992120093",
+        "name": "Vinaigre d'alcool 8% Bien Vu",
+        "materialId": "PLASTIC"
+    },
+    {
+        "barcode": "3700153131404",
+        "name": "ENERGIX Gel endurance citron OVERSTIM-S",
+        "materialId": "NON-RECYCLABLE"
+    },
+    {
+        "barcode": "3700153131466",
+        "name": "ENERGIX Gel endurance vanille OVERSTIM-S",
+        "materialId": "NON-RECYCLABLE"
+    },
+    {
+        "barcode": "5410081200551",
+        "name": "Chocolat au lait Côte d'Or",
+        "components": [
+            {
+                "name": "Emballage carton",
+                "materialId": "PAPER"
+            },
+            {
+                "name": "Emballage aluminum",
+                "materialId": "METAL"
+            }
+        ]
+    },
+    {
+        "barcode": "5410081200551",
+        "name": "Chocolat au lait, biscuits sablés Côte d'Or",
+        "components": [
+            {
+                "name": "Emballage carton",
+                "materialId": "PAPER"
+            },
+            {
+                "name": "Emballage aluminum",
+                "materialId": "METAL"
+            }
+        ]
+    },
+    {
+        "barcode": "7613034493897",
+        "name": "Lot de 2 tablletes de chocolat noir dessert 100% pur beurre de cacao NESTLE",
+        "components": [
+            {
+                "name": "Emballage papier",
+                "materialId": "PAPER"
+            },
+            {
+                "name": "3x 7613034480996",
+                "materialId": "REFERENCE"
+            }
+        ]
+    },
+    {
+        "barcode": "7613034480996",
+        "name": "Chocolat noir dessert 100% pur beurre de cacao NESTLE",
+        "components": [
+            {
+                "name": "Emballage papier",
+                "materialId": "PAPER"
+            }
+        ]
+    },
+    {
+        "barcode": null,
+        "name": "Chaussures",
+        "materialId": "TEXTILE"
+    },
+    {
+        "barcode": null,
+        "name": "T-shirt",
+        "materialId": "TEXTILE"
+    },
+    {
+        "barcode": null,
+        "name": "Polo",
+        "materialId": "TEXTILE"
+    },
+    {
+        "barcode": null,
+        "name": "Pantalon",
+        "materialId": "TEXTILE"
+    },
+    {
+        "barcode": null,
+        "name": "Pull",
+        "materialId": "TEXTILE"
+    },
+    {
+        "barcode": null,
+        "name": "Bouteille de vin blanc",
+        "components": [
+            {
+                "name": "Bouteille en verre",
+                "materialId": "GLASS"
+            },
+            {
+                "name": "Bouchon en liège",
+                "materialId": "NON-RECYCLABLE"
+            }
+        ]
+    },
+    {
+        "barcode": null,
+        "name": "Bouteille de vin rosé",
+        "components": [
+            {
+                "name": "Bouteille en verre",
+                "materialId": "GLASS"
+            },
+            {
+                "name": "Bouchon en liège",
+                "materialId": "NON-RECYCLABLE"
+            }
+        ]
+    },
+    {
+        "barcode": null,
+        "name": "Bouteille de vin rouge",
+        "components": [
+            {
+                "name": "Bouteille en verre",
+                "materialId": "GLASS"
+            },
+            {
+                "name": "Bouchon en liège",
+                "materialId": "NON-RECYCLABLE"
+            }
+        ]
+    },
+    {
+        "barcode": "3037928534581",
+        "name": "Cahier format 17x22 - 140 pages Clairefontaine",
+        "materialId": "PAPER"
+    },
+    {
+        "barcode": "3103220007822",
+        "name": "Boite de bonbon Haribo Dragolo",
+        "materialId": "NON-RECYCLABLE"
+    }
+]

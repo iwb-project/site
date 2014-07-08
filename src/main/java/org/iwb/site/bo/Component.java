@@ -13,11 +13,22 @@ public class Component {
 
     private String materialId;
 
+    private Material material;
+
+
     /**
      * Default constructor.
      */
     public Component() {
         // void
+    }
+
+    public Material getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(Material material) {
+        this.material = material;
     }
 
     public String getName() {

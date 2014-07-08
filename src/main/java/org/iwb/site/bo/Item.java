@@ -13,9 +13,9 @@ public class Item extends ItemEssentials {
 
     private String barcode;
 
-    private String wasteTypeId;
+    private String materialId;
 
-    private WasteType wasteType;
+    private Material material;
 
     private Long views;
 
@@ -58,13 +58,20 @@ public class Item extends ItemEssentials {
         this.lastEditAuthorId = lastEditAuthorId;
     }
 
-    /**
-     * Gets wasteType.
-     *
-     * @return Value of wasteType.
-     */
-    public WasteType getWasteType() {
-        return this.wasteType;
+    public Material getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(Material material) {
+        this.material = material;
+    }
+
+    public String getMaterialId() {
+        return materialId;
+    }
+
+    public void setMaterialId(String materialId) {
+        this.materialId = materialId;
     }
 
     /**
@@ -77,39 +84,12 @@ public class Item extends ItemEssentials {
     }
 
     /**
-     * Sets new wasteTypeId.
-     *
-     * @param wasteTypeId New value of wasteTypeId.
-     */
-    public void setWasteTypeId(final String  wasteTypeId) {
-        this.wasteTypeId = wasteTypeId;
-    }
-
-    /**
      * Gets description.
      *
      * @return Value of description.
      */
     public String getDescription() {
         return this.description;
-    }
-
-    /**
-     * Sets new wasteType.
-     *
-     * @param wasteType New value of wasteType.
-     */
-    public void setWasteType(final WasteType wasteType) {
-        this.wasteType = wasteType;
-    }
-
-    /**
-     * Gets wasteTypeId.
-     *
-     * @return Value of wasteTypeId.
-     */
-    public String getWasteTypeId() {
-        return this.wasteTypeId;
     }
 
     /**

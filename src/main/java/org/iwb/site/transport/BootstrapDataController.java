@@ -1,6 +1,7 @@
 package org.iwb.site.transport;
 
-import com.mongodb.MongoClient;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.iwb.site.bo.Item;
 import org.iwb.site.bo.Material;
 import org.iwb.site.repository.MaterialRepository;
@@ -12,6 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * TODO document me
@@ -34,7 +40,9 @@ public class BootstrapDataController {
     private Jongo db;
 
     @RequestMapping("/db")
-    public String bootstrapDB(@RequestParam(value = "drop", defaultValue = "false") boolean drop) {
+    public Map<String, Boolean> bootstrapDB(@RequestParam(value = "drop", defaultValue = "false") boolean drop) {
+
+        Map<String, Boolean> result = new HashMap<>();
         if (drop) {
             LOGGER.debug("dropping database");
             this.db.getCollection("materials").drop();
@@ -42,36 +50,43 @@ public class BootstrapDataController {
             this.db.getCollection("sequences").drop();
         }
 
+        result.put("loadMaterials", loadMaterials());
+        result.put("loadItems", loadItems());
 
-        loadMaterials();
-        loadItems();
-
-        return "ok";
+        return result;
     }
 
-    private void loadItems() {
-        Item water = new Item();
-        water.setName("Bouteille d'eau minérale naturelle des Alpes");
-        water.setBarcode("3560070564743");
-
-        this.itemService.save(water);
+    private boolean loadItems() {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            List<Item> items = mapper.readValue(BootstrapDataController.class.getResourceAsStream("/bootstrap/items.json"), new TypeReference<List<Item>>() {});
+            for (Item item : items) {
+                this.itemService.save(item);
+            }
+        } catch (IOException e) {
+            LOGGER.error("oops", e);
+            return false;
+        }
+        return true;
     }
 
 
-    private void loadMaterials() {
-        this.materialRepository.save(new Material("non-recycable", "Déchet non recyclable"));
-        this.materialRepository.save(new Material("compost", "Déchet végétal"));
-        this.materialRepository.save(new Material("plastic", "Plastique recyclable"));
-        this.materialRepository.save(new Material("toxic", "Déchet toxic necessitant un traitement particulier"));
-        this.materialRepository.save(new Material("medical", "Déchet médical"));
-        this.materialRepository.save(new Material("glass", "Verre"));
-        this.materialRepository.save(new Material("textile", "Déchet textile"));
-        this.materialRepository.save(new Material("paper", "Papier"));
-        this.materialRepository.save(new Material("carton", "Carton"));
-        this.materialRepository.save(new Material("electronic", "Déchet electronique"));
-        this.materialRepository.save(new Material("furniture", "Déchet végétaux"));
-        this.materialRepository.save(new Material("metal", "Métaux"));
-        this.materialRepository.save(new Material("wood", "Bois"));
+    private boolean loadMaterials() {
+        this.materialRepository.save(new Material("NON-RECYCLABLE", "Déchet non recyclable"));
+        this.materialRepository.save(new Material("COMPOST", "Déchet végétal"));
+        this.materialRepository.save(new Material("PLASTIC", "Plastique recyclable"));
+        this.materialRepository.save(new Material("TOXIC", "Déchet toxic necessitant un traitement particulier"));
+        this.materialRepository.save(new Material("MEDICAL", "Déchet médical"));
+        this.materialRepository.save(new Material("GLASS", "Verre"));
+        this.materialRepository.save(new Material("TEXTILE", "Déchet textile"));
+        this.materialRepository.save(new Material("PAPER", "Papier"));
+        this.materialRepository.save(new Material("CARTON", "Carton"));
+        this.materialRepository.save(new Material("ELECTRONIC", "Déchet electronique"));
+        this.materialRepository.save(new Material("FURNITURE", "Déchet végétaux"));
+        this.materialRepository.save(new Material("METAL", "Métaux"));
+        this.materialRepository.save(new Material("WOOD", "Bois"));
+
+        return true;
     }
 
 }
