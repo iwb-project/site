@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-md-offset-3 col-md-6">
+
+        <div class="text-center">
+            <h1><i class="glyphicon glyphicon-leaf my-green"></i></h1>
+        </div>
+        <form role="form" ng-submit="searchForItem($event)">
+            <div class="input-group">
+                <input type="text" class="form-control" ng-model="searchQuery" placeholder="Rechercher">
+                <span class="input-group-btn">
+                    <button class="btn btn-default disabled" type="button" ng-click="launchIntentForScanning($event)">
+                        &nbsp;<span class="glyphicon glyphicon-barcode"></span>&nbsp;
+                    </button>
+                    <button class="btn btn-default" type="button" ng-click="searchForItem($event)">
+                        &nbsp;<span class="glyphicon glyphicon-leaf my-green"></span>&nbsp;
+                    </button>
+                </span>
+            </div>
+        </form>
+
+    </div>
+</div>

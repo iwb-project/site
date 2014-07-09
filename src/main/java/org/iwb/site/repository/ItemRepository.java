@@ -12,7 +12,7 @@ public interface ItemRepository {
 
     Iterable<ItemEssentials> findAll();
 
-    Item findItemById(String itemId);
+    Item findItemById(Long itemId);
 
     Item save(Item item);
 }

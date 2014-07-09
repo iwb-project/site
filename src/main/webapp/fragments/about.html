@@ -1,0 +1,52 @@
+<div class="jumbotron">
+    <div class="container">
+        <h1>In Which Bin!</h1>
+
+        <p>Le projet In Which Bin a pour but d'aider les citoyens à trier les déchets en fonction des possibilités mise à leur disposition où il se trouve.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Je pense donc je tri</h2>
+
+                <p>En triant vos déchets correctement vous aidez à réduire la consomation d'eau et d'énergie utilisée pour
+                   produire les emballages des produits que vous consomerez demain.</p>
+            </div>
+            <div class="col-md-4">
+                <h2>Responsable</h2>
+
+                <p>Je consome donc je suis ! Oui, mais il est important de consomer de manière responsable et de favoriser
+                    les produits qui limitent leur impact sur l'environement</p>
+
+                <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            </div>
+
+            <div class="col-md-4">
+                <h2>A propos</h2>
+
+                <p>
+                    <dl class="dl-horizontal">
+                        <dt>Application version</dt>
+                        <dd>{{::about.version}}</dd>
+
+                        <dt>Build date</dt>
+                        <dd>{{::about.buildDate}}</dd>
+
+                        <dt>Revision</dt>
+                        <dd><a href="https://github.com/iwb-project/site/tree/{{about.gitSha1}}">view on GitHub</a></dd>
+
+                        <dt>MongoDB version</dt>
+                        <dd>{{::about.mongoddVersion}}</dd>
+
+                        <dt>Elasticsearch version</dt>
+                        <dd>{{::about.elasticsearchVersion}}</dd>
+                    </dl>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

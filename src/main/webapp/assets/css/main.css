@@ -3,9 +3,23 @@
 body { padding-top: 70px; }
 
 .my-green {
-    color: rgb(109, 179, 63);
+    color: #6db33f;
 }
 
 .my-red{
-    color: rgb(216, 94, 84);
+    color: #d85e54;
+}
+
+.my-gray {
+    color: #666666;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 30px;
+    color: #ffffff;
+    background-color: #34302d;
 }

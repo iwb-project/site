@@ -23,7 +23,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Item findItemById(final String itemId) {
+    public Item findItemById(final Long itemId) {
         return this.itemRepository.findItemById(itemId);
     }
 

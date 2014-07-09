@@ -30,7 +30,7 @@ public class ItemRepositoryImpl implements ItemRepository {
     }
 
     @Override
-    public Item findItemById(final String itemId) {
+    public Item findItemById(final Long itemId) {
         return this.collection.findOne("{_id: #}", itemId).as(Item.class);
     }
 
