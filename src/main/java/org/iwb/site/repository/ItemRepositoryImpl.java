@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Repository;
 
+import java.util.regex.Pattern;
+
 /**
  * TODO document me
  *
@@ -41,5 +43,11 @@ public class ItemRepositoryImpl implements ItemRepository {
         }
         this.collection.save(item);
         return item;
+    }
+
+    @Override
+    public Iterable<ItemEssentials> search(String query) {
+        Pattern regex = Pattern.compile(".*" + query + ".*", Pattern.CASE_INSENSITIVE);
+        return collection.find("{$or: [{name: #}, {barcode: #}]}", regex, query).as(ItemEssentials.class);
     }
 }

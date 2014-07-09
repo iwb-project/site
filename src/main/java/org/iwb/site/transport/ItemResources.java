@@ -34,7 +34,7 @@ public class ItemResources {
     @ResponseBody
     public Iterable<ItemEssentials> searchItems(@RequestParam("q") String query) {
         LOGGER.debug("searching for {}", query);
-        return this.service.findAll();
+        return this.service.search(query);
     }
 
 

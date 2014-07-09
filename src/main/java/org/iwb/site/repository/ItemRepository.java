@@ -15,4 +15,6 @@ public interface ItemRepository {
     Item findItemById(Long itemId);
 
     Item save(Item item);
+
+    Iterable<ItemEssentials> search(String query);
 }

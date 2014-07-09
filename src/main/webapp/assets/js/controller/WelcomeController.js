@@ -12,4 +12,9 @@ angular.module('iwbApplication').controller('welcomeController', ['$scope', '$lo
             $location.search('q', $scope.searchQuery);
             $location.path("/search");
         }
+
+        $scope.launchIntentForScanning = function(event) {
+            var callbackUrl = encodeURIComponent($location.absUrl().replace(/\/#\/.*/, '/#/search?q={CODE}'));
+            window.location.assign('http://zxing.appspot.com/scan?ret=' + callbackUrl);
+        }
     }]);

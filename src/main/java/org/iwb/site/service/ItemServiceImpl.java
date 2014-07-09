@@ -5,6 +5,7 @@ import org.iwb.site.bo.ItemEssentials;
 import org.iwb.site.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 /**
  * TODO: document me.
@@ -20,6 +21,15 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public Iterable<ItemEssentials> findAll() {
         return this.itemRepository.findAll();
+    }
+
+    @Override
+    public Iterable<ItemEssentials> search(final String query) {
+        if (StringUtils.isEmpty(query)) {
+            return findAll();
+        } else {
+            return this.itemRepository.search(query);
+        }
     }
 
     @Override
