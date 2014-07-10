@@ -1,5 +1,8 @@
 package org.iwb.site.transport;
 
+import org.jongo.MongoCollection;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +20,10 @@ import java.util.Map;
 @RestController
 public class AboutController {
 
+    @Autowired
+    @Qualifier("itemsCollection")
+    private MongoCollection itemsCollections;
+
     /**
      * Returns information about the application.
      *
@@ -30,6 +37,7 @@ public class AboutController {
         about.put("gitSha1", "64b786695ecebe7b09a1e19d214ee56fe8ae3263");
         about.put("mongodbVersion", "2.6");
         about.put("elasticsearchVersion", "1.2");
+        about.put("itemCount", this.itemsCollections.count());
         return about;
     }
 

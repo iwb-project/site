@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.util.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.net.UnknownHostException;
@@ -31,15 +32,16 @@ public class ApplicationConfiguration {
     public Jongo jongo() throws UnknownHostException {
         String host = System.getProperty("mongodb.host", "localhost");
         int port = Integer.valueOf(System.getProperty("mongodb.port", "27017"));
-        String user = System.getProperty("monngodb.user");
-        String pass = System.getProperty("monngodb.pass");
-        String database = System.getProperty("monngodb.db", "iwb-dev");
+        String user = System.getProperty("mongodb.user");
+        String pass = System.getProperty("mongodb.pass", "");
+        String database = System.getProperty("mongodb.db", "iwb-dev");
 
+
+        LOGGER.info("connecting to mongodb://{}:{}@{}:{}/{}", user, pass.replaceAll(".", "*"), host, port, database);
         DB db;
         if (user != null) {
-            db = new MongoClient(new ServerAddress(host, port),
-                    Arrays.asList(MongoCredential.createPlainCredential(user, database, pass.toCharArray())))
-                    .getDB(database);
+            MongoClientURI uri = new MongoClientURI(String.format("mongodb://%s:%s@%s:%d/%s", user, pass, host, port, database));
+            db = new MongoClient(uri).getDB(uri.getDatabase());
         } else {
             LOGGER.warn("connecting to mongodb w/o credentials");
             db = new MongoClient(new ServerAddress(host, port)).getDB(database);
