@@ -11,12 +11,26 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
+        <project.buildDate>${maven.build.timestamp}</project.buildDate>
+        <project.buildRevision></project.buildRevision>
+
+        <!-- libraries -->
         <spring.version>4.0.5.RELEASE</spring.version>
         <jongo.version>1.0</jongo.version>
         <mongodb-driver.version>2.12.2</mongodb-driver.version>
     </properties>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
