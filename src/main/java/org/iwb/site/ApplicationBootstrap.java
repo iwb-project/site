@@ -14,7 +14,7 @@ import javax.servlet.ServletRegistration;
  *
  * @author mathieu.pousse@zenika.com
  */
-public class ApplicationBootstrap implements WebApplicationInitializer {
+public class ApplicationBootstrap implements WebApplicationInitializer{
 
     @Override
     public void onStartup(final ServletContext servletContext) throws ServletException {

@@ -10,8 +10,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.util.*;
+import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import javax.annotation.PreDestroy;
 import java.net.UnknownHostException;
 import java.util.Arrays;
 
@@ -29,24 +31,36 @@ public class ApplicationConfiguration {
     private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationConfiguration.class);
 
     @Bean
-    public Jongo jongo() throws UnknownHostException {
+    public ApplicationShutdown shutdown() {
+        return new ApplicationShutdown();
+    }
+
+    @Bean
+    public MongoClient mongoClient() throws UnknownHostException {
         String host = System.getProperty("mongodb.host", "localhost");
         int port = Integer.valueOf(System.getProperty("mongodb.port", "27017"));
         String user = System.getProperty("mongodb.user");
         String pass = System.getProperty("mongodb.pass", "");
         String database = System.getProperty("mongodb.db", "iwb-dev");
 
-
         LOGGER.info("connecting to mongodb://{}:{}@{}:{}/{}", user, pass.replaceAll(".", "*"), host, port, database);
-        DB db;
         if (user != null) {
             MongoClientURI uri = new MongoClientURI(String.format("mongodb://%s:%s@%s:%d/%s", user, pass, host, port, database));
-            db = new MongoClient(uri).getDB(uri.getDatabase());
+            return new MongoClient(uri);
         } else {
             LOGGER.warn("connecting to mongodb w/o credentials");
-            db = new MongoClient(new ServerAddress(host, port)).getDB(database);
+            return new MongoClient(new ServerAddress(host, port));
         }
-        return new Jongo(db);
+    }
+
+    public DB db() throws UnknownHostException {
+        String database = System.getProperty("mongodb.db", "iwb-dev");
+        return mongoClient().getDB(database);
+    }
+
+    @Bean
+    public Jongo jongo() throws UnknownHostException {
+        return new Jongo(db());
     }
 
     @Bean
@@ -62,6 +76,11 @@ public class ApplicationConfiguration {
     @Bean
     public MongoCollection materialsCollection() throws UnknownHostException {
         return jongo().getCollection("materials");
+    }
+
+    @Bean
+    public MongoCollection trashesCollection() throws UnknownHostException {
+        return jongo().getCollection("trashes");
     }
 
 }
