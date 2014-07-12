@@ -1,0 +1,12 @@
+
+<div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="trashes" data-toggle="dropdown">
+        Trashes
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="trashes">
+        <li role="presentation" ng-repeat="trash in trashes">
+            <a role="menuitem" tabindex="-1" href="#"><small>{{ trash._id }}</small><span ng-class="trash.snippet"></span></a>
+        </li>
+    </ul>
+</div>

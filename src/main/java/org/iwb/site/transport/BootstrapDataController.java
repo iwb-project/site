@@ -4,7 +4,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.iwb.site.bo.Item;
 import org.iwb.site.bo.Material;
+import org.iwb.site.bo.Trash;
 import org.iwb.site.repository.MaterialRepository;
+import org.iwb.site.repository.TrashRepository;
 import org.iwb.site.service.ItemService;
 import org.jongo.Jongo;
 import org.slf4j.Logger;
@@ -37,6 +39,9 @@ public class BootstrapDataController {
     private MaterialRepository materialRepository;
 
     @Autowired
+    private TrashRepository trashRepository;
+
+    @Autowired
     private Jongo db;
 
     @RequestMapping("/db")
@@ -47,19 +52,35 @@ public class BootstrapDataController {
             LOGGER.debug("dropping database");
             this.db.getCollection("materials").drop();
             this.db.getCollection("items").drop();
+            this.db.getCollection("trashes").drop();
             this.db.getCollection("sequences").drop();
         }
 
         result.put("loadMaterials", loadMaterials());
         result.put("loadItems", loadItems());
+        result.put("loadTrashes", loadTrashes());
 
         return result;
+    }
+
+    private boolean loadTrashes() {
+        this.trashRepository.save(new Trash("glyphicon glyphicon-trash trash-yellow"));
+        this.trashRepository.save(new Trash("glyphicon glyphicon-trash trash-green"));
+        this.trashRepository.save(new Trash("glyphicon glyphicon-trash trash-black"));
+        this.trashRepository.save(new Trash("glyphicon glyphicon-trash trash-brawn"));
+        this.trashRepository.save(new Trash("glyphicon glyphicon-trash trash-gray"));
+        this.trashRepository.save(new Trash("glyphicon glyphicon-leaf trash-compost"));
+        this.trashRepository.save(new Trash("glyphicon glyphicon-download-alt trash-glass"));
+        this.trashRepository.save(new Trash("glyphicon glyphicon-download-alt trash-black"));
+        this.trashRepository.save(new Trash("glyphicon glyphicon-fire trash-yellow"));
+        return true;
     }
 
     private boolean loadItems() {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            List<Item> items = mapper.readValue(BootstrapDataController.class.getResourceAsStream("/bootstrap/items.json"), new TypeReference<List<Item>>() {});
+            List<Item> items = mapper.readValue(BootstrapDataController.class.getResourceAsStream("/bootstrap/items.json"), new TypeReference<List<Item>>() {
+            });
             for (Item item : items) {
                 this.itemService.save(item);
             }

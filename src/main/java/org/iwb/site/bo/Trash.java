@@ -10,34 +10,91 @@ import java.util.List;
  * @author mathieu.pousse@zenika.com
  */
 public class Trash {
-    
+
     @Id
     private Long id;
-    
-    private List<String> materials;
 
-    public Long getId() {
-        return id;
-    }
+    private String icon;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private String color;
 
-    public List<String> getMaterials() {
-        return materials;
-    }
-
-    public void setMaterials(List<String> materials) {
-        this.materials = materials;
-    }
+    private String snippet;
 
     /**
      * Default constructor.
      */
     public Trash() {
         // void
-
     }
 
+    public Trash(final String snippet) {
+        this.snippet = snippet;
+    }
+
+    public Trash(final String icon, final String color) {
+        this.icon = icon;
+        this.color = color;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(final Long id) {
+        this.id = id;
+    }
+
+    /**
+     * Gets color.
+     *
+     * @return Value of color.
+     */
+    public String getColor() {
+        return color;
+    }
+
+    /**
+     * Sets new icon.
+     *
+     * @param icon New value of icon.
+     */
+    public void setIcon(final String icon) {
+        this.icon = icon;
+    }
+
+    /**
+     * Sets new color.
+     *
+     * @param color New value of color.
+     */
+    public void setColor(final String color) {
+        this.color = color;
+    }
+
+    /**
+     * Gets icon.
+     *
+     * @return Value of icon.
+     */
+    public String getIcon() {
+        return icon;
+    }
+
+    /**
+     * Sets new snippet.
+     *
+     * @param snippet New value of snippet.
+     */
+    public void setSnippet(final String snippet) {
+        this.snippet = snippet;
+    }
+
+    /**
+     * Gets snippet.
+     *
+     * @return Value of snippet.
+     */
+    public String getSnippet() {
+        return snippet;
+    }
 }

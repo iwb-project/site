@@ -14,6 +14,31 @@ body { padding-top: 70px; }
     color: #666666;
 }
 
+
+.trash-green {
+    color: #17b32b;
+}
+
+.trash-compost {
+    color: #6db33f;
+}
+
+.trash-gray {
+    color: #595959;
+}
+
+.trash-black {
+    color: #595959;
+}
+
+.trash-yellow {
+    color: #fff400;
+}
+
+.trash-brawn {
+    color: #925400;
+}
+
 .footer {
     position: absolute;
     bottom: 0;
