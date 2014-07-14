@@ -17,7 +17,7 @@ public class Item extends ItemEssentials {
 
     private Material material;
 
-    private Long views;
+    private Long views = 1L;
 
     private String authorId;
 
