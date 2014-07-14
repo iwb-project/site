@@ -45,8 +45,12 @@ public class ItemServiceImpl implements ItemService {
             return null;
         }
 
-        for (Component component : result.getComponents()) {
-            component.setTrash(trashService.findTrashByLocationAndMaterial(35000L, component.getMaterialId()));
+        if (result.getComponents() == null) {
+            result.setTrash(trashService.findTrashByLocationAndMaterial(35000L, result.getMaterialId()));
+        } else {
+            for (Component component : result.getComponents()) {
+                component.setTrash(trashService.findTrashByLocationAndMaterial(35000L, component.getMaterialId()));
+            }
         }
 
         return result;

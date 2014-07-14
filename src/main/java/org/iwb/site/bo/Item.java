@@ -127,4 +127,22 @@ public class Item extends ItemEssentials {
     public void setComponents(final List<Component> components) {
         this.components = components;
     }
+
+    /**
+     * Sets new trash.
+     *
+     * @param trash New value of trash.
+     */
+    public void setTrash(Trash trash) {
+        this.trash = trash;
+    }
+
+    /**
+     * Gets trash.
+     *
+     * @return Value of trash.
+     */
+    public Trash getTrash() {
+        return trash;
+    }
 }
