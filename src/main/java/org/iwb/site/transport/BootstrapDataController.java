@@ -88,6 +88,8 @@ public class BootstrapDataController {
         this.secondLifeRepository.save(new SecondLife(35000L, "COMPOST", this.compost.getId()));
         this.secondLifeRepository.save(new SecondLife(35000L, "PLASTIC", this.trashYellow.getId()));
         this.secondLifeRepository.save(new SecondLife(35000L, "PAPER", this.trashYellow.getId()));
+        this.secondLifeRepository.save(new SecondLife(35000L, "GLASS", this.trashYellow.getId()));
+        this.secondLifeRepository.save(new SecondLife(35000L, "METAL", this.trashYellow.getId()));
         this.secondLifeRepository.save(new SecondLife(35000L, "NON-RECYCLABLE", this.trashGray.getId()));
         return true;
     }
