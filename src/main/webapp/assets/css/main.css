@@ -1,19 +1,23 @@
 
+body {
+    padding-top: 70px;
+}
 
-body { padding-top: 70px; }
+html, body, #application { height: 100%; }
+body > #application { height: auto; min-height: 100%; }
+
 
 .my-green {
     color: #6db33f;
 }
 
-.my-red{
+.my-red {
     color: #d85e54;
 }
 
 .my-gray {
     color: #666666;
 }
-
 
 .trash-green {
     color: #17b32b;
@@ -40,11 +44,11 @@ body { padding-top: 70px; }
 }
 
 .footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    /* Set the fixed height of the footer here */
-    height: 30px;
+    clear: both;
+    position: relative;
+    z-index: 10;
+    height: 3em;
+    margin-top: -3em;
     color: #ffffff;
     background-color: #34302d;
 }
