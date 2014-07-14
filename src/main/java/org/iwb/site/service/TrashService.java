@@ -14,4 +14,6 @@ public interface TrashService {
     Trash findTrashById(Long trashId);
 
     Trash save(Trash trash);
+
+    Trash findTrashByLocationAndMaterial(Long locationId, String materialId);
 }

@@ -1,19 +1,18 @@
 package org.iwb.site;
 
-import com.mongodb.*;
+import com.mongodb.DB;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.ServerAddress;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.util.*;
-import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import javax.annotation.PreDestroy;
 import java.net.UnknownHostException;
-import java.util.Arrays;
 
 /**
  * TODO document me
@@ -85,6 +84,16 @@ public class ApplicationConfiguration {
     @Bean
     public MongoCollection trashesCollection() throws UnknownHostException {
         return jongo().getCollection("trashes");
+    }
+
+    @Bean
+    public MongoCollection locationsCollection() throws UnknownHostException {
+        return jongo().getCollection("locations");
+    }
+
+    @Bean
+    public MongoCollection secondLivesCollection() throws UnknownHostException {
+        return jongo().getCollection("secondLives");
     }
 
 }

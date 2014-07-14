@@ -33,7 +33,14 @@ public class ItemRepositoryImpl implements ItemRepository {
 
     @Override
     public Item findItemById(final Long itemId) {
-        return this.collection.findOne("{_id: #}", itemId).as(Item.class);
+        Item item = this.collection.findOne("{_id: #}", itemId).as(Item.class);
+        if (item == null) {
+            return null;
+        }
+
+        this.collection.update("{_id: #}", itemId).with("{$inc: {views: 1}}");
+
+        return item;
     }
 
     @Override

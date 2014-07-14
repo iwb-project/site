@@ -19,7 +19,7 @@ import java.util.Map;
  * @author mathieu.pousse@zenika.com
  */
 @RestController
-public class AboutController {
+public class AboutResources {
 
     @Autowired
     @Qualifier("itemsCollection")

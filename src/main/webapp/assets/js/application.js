@@ -2,7 +2,8 @@
 
 var iwbApplication = angular.module('iwbApplication', [
     'ngRoute',
-    'ngResource'
+    'ngResource',
+    'flow' // file upload
 ]);
 
 iwbApplication.config(['$routeProvider',

@@ -1,8 +1,10 @@
 package org.iwb.site.service;
 
+import org.iwb.site.bo.Component;
 import org.iwb.site.bo.Item;
 import org.iwb.site.bo.ItemEssentials;
 import org.iwb.site.repository.ItemRepository;
+import org.iwb.site.repository.TrashRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -17,6 +19,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private ItemRepository itemRepository;
+
+    @Autowired
+    private TrashService trashService;
 
     @Override
     public Iterable<ItemEssentials> findAll() {
@@ -34,7 +39,17 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Item findItemById(final Long itemId) {
-        return this.itemRepository.findItemById(itemId);
+        Item result = this.itemRepository.findItemById(itemId);
+
+        if (result == null) {
+            return null;
+        }
+
+        for (Component component : result.getComponents()) {
+            component.setTrash(trashService.findTrashByLocationAndMaterial(35000L, component.getMaterialId()));
+        }
+
+        return result;
     }
 
     @Override

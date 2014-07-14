@@ -2,16 +2,18 @@ package org.iwb.site.transport;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.iwb.site.bo.Item;
-import org.iwb.site.bo.Material;
-import org.iwb.site.bo.Trash;
+import org.iwb.site.bo.*;
+import org.iwb.site.repository.LocationRepository;
 import org.iwb.site.repository.MaterialRepository;
+import org.iwb.site.repository.SecondLifeRepository;
 import org.iwb.site.repository.TrashRepository;
 import org.iwb.site.service.ItemService;
 import org.jongo.Jongo;
+import org.jongo.MongoCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,34 +44,68 @@ public class BootstrapDataController {
     private TrashRepository trashRepository;
 
     @Autowired
+    private LocationRepository locationRepository;
+
+    @Autowired
+    private SecondLifeRepository secondLifeRepository;
+
+    @Autowired
     private Jongo db;
+
+    @Autowired
+    private ApplicationContext context;
+
+    private Location rennes;
+
+    private Trash trashYellow;
+    private Trash trashGray;
+    private Trash compost;
 
     @RequestMapping("/db")
     public Map<String, Boolean> bootstrapDB(@RequestParam(value = "drop", defaultValue = "false") boolean drop) {
 
         Map<String, Boolean> result = new HashMap<>();
         if (drop) {
-            LOGGER.debug("dropping database");
-            this.db.getCollection("materials").drop();
-            this.db.getCollection("items").drop();
-            this.db.getCollection("trashes").drop();
-            this.db.getCollection("sequences").drop();
+            LOGGER.warn("dropping database");
+            this.context.getBean("locationsCollection", MongoCollection.class).drop();
+            this.context.getBean("materialsCollection", MongoCollection.class).drop();
+            this.context.getBean("itemsCollection", MongoCollection.class).drop();
+            this.context.getBean("trashesCollection", MongoCollection.class).drop();
+            this.context.getBean("secondLivesCollection", MongoCollection.class).drop();
+            this.context.getBean("sequencesCollection", MongoCollection.class).drop();
         }
 
         result.put("loadMaterials", loadMaterials());
         result.put("loadItems", loadItems());
         result.put("loadTrashes", loadTrashes());
+        result.put("loadLocations", loadLocations());
+        result.put("loadSecondLives", loadSecondLives());
 
         return result;
     }
 
+    private boolean loadSecondLives() {
+        this.secondLifeRepository.save(new SecondLife(35000L, "COMPOST", this.compost.getId()));
+        this.secondLifeRepository.save(new SecondLife(35000L, "PLASTIC", this.trashYellow.getId()));
+        this.secondLifeRepository.save(new SecondLife(35000L, "PAPER", this.trashYellow.getId()));
+        this.secondLifeRepository.save(new SecondLife(35000L, "NON-RECYCLABLE", this.trashGray.getId()));
+        return true;
+    }
+
+    private boolean loadLocations() {
+        this.rennes = this.locationRepository.save(new Location(35000, "Rennes"));
+        this.locationRepository.save(new Location(35190, "Tinténiac"));
+        this.locationRepository.save(new Location(59000, "Lille"));
+        return true;
+    }
+
     private boolean loadTrashes() {
-        this.trashRepository.save(new Trash("glyphicon glyphicon-trash trash-yellow"));
+        this.trashYellow = this.trashRepository.save(new Trash("glyphicon glyphicon-trash trash-yellow"));
         this.trashRepository.save(new Trash("glyphicon glyphicon-trash trash-green"));
         this.trashRepository.save(new Trash("glyphicon glyphicon-trash trash-black"));
         this.trashRepository.save(new Trash("glyphicon glyphicon-trash trash-brawn"));
-        this.trashRepository.save(new Trash("glyphicon glyphicon-trash trash-gray"));
-        this.trashRepository.save(new Trash("glyphicon glyphicon-leaf trash-compost"));
+        this.trashGray = this.trashRepository.save(new Trash("glyphicon glyphicon-trash trash-gray"));
+        this.compost = this.trashRepository.save(new Trash("glyphicon glyphicon-leaf trash-compost"));
         this.trashRepository.save(new Trash("glyphicon glyphicon-download-alt trash-glass"));
         this.trashRepository.save(new Trash("glyphicon glyphicon-download-alt trash-black"));
         this.trashRepository.save(new Trash("glyphicon glyphicon-fire trash-yellow"));

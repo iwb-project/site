@@ -15,6 +15,7 @@ public class Component {
 
     private Material material;
 
+    private Trash trash;
 
     /**
      * Default constructor.
@@ -53,5 +54,23 @@ public class Component {
 
     public void setMaterialId(String materialId) {
         this.materialId = materialId;
+    }
+
+    /**
+     * Sets new trash.
+     *
+     * @param trash New value of trash.
+     */
+    public void setTrash(Trash trash) {
+        this.trash = trash;
+    }
+
+    /**
+     * Gets trash.
+     *
+     * @return Value of trash.
+     */
+    public Trash getTrash() {
+        return trash;
     }
 }

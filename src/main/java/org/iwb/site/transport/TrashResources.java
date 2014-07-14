@@ -29,4 +29,12 @@ public class TrashResources {
         return this.service.findTrashById(materialId);
     }
 
+    @RequestMapping(method = RequestMethod.GET)
+    @ResponseBody
+    public Trash findTrashByLocationAndMaterial(
+            @RequestParam("locationId") final Long locationId,
+            @RequestParam("materialId") final String materialId) {
+        return this.service.findTrashByLocationAndMaterial(locationId, materialId);
+    }
+
 }

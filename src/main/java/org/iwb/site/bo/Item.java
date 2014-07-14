@@ -25,6 +25,8 @@ public class Item extends ItemEssentials {
 
     private List<Component> components;
 
+    private Trash trash;
+
     private long version;
 
     /**

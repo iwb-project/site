@@ -23,7 +23,7 @@
 
     <appender name="org.springframework" level="DEBUG"/>
 
-    <root level="info" additivity="false">
+    <root level="DEBUG" additivity="false">
         <appender-ref ref="STDOUT"/>
         <!--<appender-ref ref="FILE"/>-->
     </root>
