@@ -3,7 +3,9 @@
 var iwbApplication = angular.module('iwbApplication', [
     'ngRoute',
     'ngResource',
-    'flow' // file upload
+    'ngCookies',
+    'flow', // file upload
+    'ui.bootstrap'
 ]);
 
 iwbApplication.config(['$routeProvider',
@@ -14,10 +16,10 @@ iwbApplication.config(['$routeProvider',
             $routeProvider.when('/edit/:itemId', {templateUrl: 'fragments/edit.html', controller: 'viewController'});
             $routeProvider.when('/trashes/', {templateUrl: 'fragments/trashes.html', controller: 'trashesController'});
             $routeProvider.when('/about', {templateUrl: 'fragments/about.html', controller: 'aboutController'});
-//        $routeProvider.when('/packages/id/:packageId', {templateUrl: 'fragments/package.html', controller: PackageController});
-//        $routeProvider.when('/packages', {templateUrl: 'fragments/packages.html', controller: PackagesController});
         $routeProvider.otherwise({redirectTo: '/'});
     }])
     .config(function($sceProvider) {
         $sceProvider.enabled(false);
-    });;
+    });
+
+

@@ -1,4 +1,5 @@
-<configuration>
+<configuration>    <appender name="org.springframework" level="DEBUG"/>
+
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -6,26 +7,8 @@
         </encoder>
     </appender>
 
-    <!--<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
-        <!--<file>logFile.log</file>-->
-        <!--<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
-            <!--&lt;!&ndash; daily rollover &ndash;&gt;-->
-            <!--<fileNamePattern>logFile.%d{yyyy-MM-dd}.log</fileNamePattern>-->
-
-            <!--&lt;!&ndash; keep 1 days' worth of history &ndash;&gt;-->
-            <!--<maxHistory>5</maxHistory>-->
-        <!--</rollingPolicy>-->
-
-        <!--<encoder>-->
-            <!--<pattern>%d{HH:mm:ss.SSS}  %-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>-->
-        <!--</encoder>-->
-    <!--</appender>-->
-
-    <appender name="org.springframework" level="DEBUG"/>
-
-    <root level="DEBUG" additivity="false">
+    <root level="INFO" additivity="false">
         <appender-ref ref="STDOUT"/>
-        <!--<appender-ref ref="FILE"/>-->
     </root>
 
 </configuration>
