@@ -69,9 +69,15 @@ public class LocationsBootstraper {
         }
         List<String> rows = new ArrayList<>();
         for (Map.Entry<String, DBObject> entry : atTheEnd.entrySet()) {
+            String name = ((String)(entry.getValue().get("name")))
+                    .replaceFirst("^CC ", "Communauté de commune ")
+                    .replaceFirst("^CA ", "Communauté d'agglomération ")
+                    .replaceFirst("^CU ", "Communauté urbaine ")
+                    .replaceFirst("^SAN ", "Syndicat d'agglomération nouvelle ");
+            entry.getValue().put("name", name);
             rows.add(entry.getValue().toString());
         }
-        FileUtils.writeLines(FileUtils.getFile("d:/dump.json"), "UTF-8", rows);
+        FileUtils.writeLines(FileUtils.getFile("dump.json"), "UTF-8", rows);
 
     }
 
