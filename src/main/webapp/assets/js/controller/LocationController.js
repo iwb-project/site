@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('iwbApplication').controller('locationController',
-    ['$scope', '$modalInstance', 'locationService',
-    function ($scope, $modalInstance, locationService) {
+    ['$scope', 'locationService', '$modalInstance',
+    function ($scope, locationService, $modalInstance) {
         $scope.name = 'locationController';
 
         $scope.alert = [];
-        $scope.city = '';
+        $scope.city = locationService.loadFromCookie();
 
         $scope.tryHtml5Geolocation = function() {
             locationService.tryHtml5Geolocation($scope);

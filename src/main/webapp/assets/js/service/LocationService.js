@@ -4,8 +4,12 @@ angular.module('iwbApplication').service('locationService', ['$http', '$cookies'
     return {
         select: function (city) {
             if (city != '') {
-                $cookies.city = city;
+                $cookies.location = city;
             }
+        },
+        loadFromCookie: function() {
+          var location = $cookies.location;
+            return location != undefined && location != '' ? location : 'default';
         },
         geolocate: function (latitude, longitude) {
             return $http({

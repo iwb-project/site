@@ -6,14 +6,17 @@ angular.module('iwbApplication').controller('viewController', ['$scope', '$locat
         $scope.itemId = $routeParams.itemId;
         $scope.item = {};
 
+        $scope.edit = function () {
+            $location.url('edit/' + $scope.itemId);
+        }
 
-        $scope.view = function() {
+        $scope.load = function () {
             itemService.get($scope.itemId)
                 .then(function (result) {
                     $scope.item = result.data;
                 });
         }
 
-        $scope.view();
+        $scope.load();
 
     }]);

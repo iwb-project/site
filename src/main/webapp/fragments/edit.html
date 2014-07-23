@@ -1,34 +1,63 @@
 <div class="row">
     <div class="col-md-offset-1 col-md-10">
-        <h3>Name: {{ item.name }}</h3>
-        <h4>Barcode: {{ item.barcode }}</h4>
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Name:</label>
+
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="Name" ng-model="item.name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="itemBarcodeInput" class="col-sm-2 control-label">Barcode</label>
+
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" placeholder="Barcode" maxlength="13" ng-model="item.barcode"
+                           id="itemBarcodeInput">
+                </div>
+            </div>
+
+            <div class="form-group" ng-visible="item.components.length == 0">
+                <label for="itemMaterialInput" class="col-sm-2 control-label">Material</label>
+
+                <div class="col-sm-4">
+                    <select class="form-control" id="itemMaterialInput">
+                        <option ng-repeat="material in materials" value="{{ material._id }}">
+                            {{ material.description }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-offset-1 col-md-10 text-right">
+        <button class="btn btn-default" ng-click="addComponent()">
+            <span class="glyphicon glyphicon-plus"></span> Add component
+        </button>
+        <button class="btn btn-success" ng-click="storeItem()">
+            <span class="glyphicon glyphicon-floppy-disk"></span> Save
+        </button>
+    </div>
+
+    <div class="col-md-offset-1 col-md-10">
+        <form class="form-inline" role="form" ng-repeat="component in item.components">
+            <div class="form-group">
+                <label class="sr-only" for="component_{{ $index }}_name">Name</label>
+                <input type="text" class="form-control" placeholder="Name" ng-model="component.name"
+                       id="component_{{ $index }}_name">
+            </div>
+            <div class="form-group">
+                <label class="sr-only" for="component_{{ $index }}_material">Material</label>
+                <select class="form-control" ng-model="component.materialId" id="component_{{ $index }}_material">
+                    <option ng-repeat="material in materials" value="{{ material._id }}">
+                        {{ material.description }}
+                    </option>
+                </select>
+                <button class="btn btn-warning" ng-click="removeComponent($index)"><span
+                        class="glyphicon glyphicon-minus"></span></button>
+            </div>
+        </form>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-offset-2 col-md-10" ng-repeat="component in item.components">
-        <h3>Component: {{ component.name }}</h3>
-        <h4>Material: {{ component.materialId }}</h4>
-    </div>
-</div>
-<div flow-init="{target: '/images/upload'}"
-     flow-files-submitted="$flow.upload()"
-     flow-file-success="$file.msg = $message">
 
-    <input type="file" flow-btn/>
-    Input OR Other element as upload button
-    <span class="btn btn-danger" flow-btn>Upload File</span>
-
-    <div class="alert alert-info" flow-drop
-         flow-drag-enter="style={border:'4px solid green'}" flow-drag-leave="style={}"
-                                                 ng-style="style">
-        Drag And Drop your file here
-    </div>
-
-    <table>
-        <tr ng-repeat="file in $flow.files">
-            <td>{{$index+1}}</td>
-            <td>{{file.name}}</td>
-            <td>{{file.msg}}</td>
-        </tr>
-    </table>
-</div>

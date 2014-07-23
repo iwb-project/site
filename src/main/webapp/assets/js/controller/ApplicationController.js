@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('iwbApplication').controller('applicationController',
-    ['$scope', '$modal', '$log',
-        function ($scope, $modal, $log) {
+    ['$scope', 'locationService', '$modal', '$log',
+        function ($scope, locationService, $modal, $log) {
             $scope.name = 'applicationController';
+
+            $scope.location = locationService.loadFromCookie();
 
             $scope.popup = function () {
                 var modalInstance = $modal.open({

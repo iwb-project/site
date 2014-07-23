@@ -1,5 +1,6 @@
 package org.iwb.site.transport;
 
+import com.mongodb.BasicDBObject;
 import org.iwb.site.bo.Item;
 import org.iwb.site.bo.ItemEssentials;
 import org.iwb.site.service.ItemService;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * TODO: document me.
@@ -42,6 +44,23 @@ public class ItemResources {
     @ResponseBody
     public Item findItemById(@PathVariable("itemId") final Long itemId) {
         return this.service.findItemById(itemId);
+    }
+
+    @RequestMapping(value = "/{itemId}", method = RequestMethod.PUT)
+    @ResponseBody
+    public Map<String, Object> update(@RequestBody Item item) {
+        try {
+            Item saved = this.service.save(item);
+            return new BasicDBObject("error", null).append("itemId", saved.getId()).toMap();
+        } catch (Exception any) {
+            return new BasicDBObject("error", any.getClass() + " - " + any.getMessage()).toMap();
+        }
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> create(@RequestBody Item item) {
+        return update(item);
     }
 
 }
