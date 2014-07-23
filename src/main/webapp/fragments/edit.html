@@ -21,7 +21,7 @@
                 <label for="itemMaterialInput" class="col-sm-2 control-label">Material</label>
 
                 <div class="col-sm-4">
-                    <select class="form-control" id="itemMaterialInput">
+                    <select class="form-control" id="itemMaterialInput" ng-model="item.materialId">
                         <option ng-repeat="material in materials" value="{{ material._id }}">
                             {{ material.description }}
                         </option>

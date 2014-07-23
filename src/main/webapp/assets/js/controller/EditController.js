@@ -4,6 +4,7 @@ angular.module('iwbApplication').controller('editController',
     ['$scope', '$location', '$routeParams', 'itemService', 'materialService',
         function ($scope, $location, $routeParams, itemService, materialService) {
             $scope.name = 'editController';
+            console.log("editing")
             $scope.itemId = $routeParams.itemId;
 
             $scope.addComponent = function () {
@@ -28,6 +29,7 @@ angular.module('iwbApplication').controller('editController',
                             if (result.data.error != null) {
                                 alert(result.data.error);
                             } else {
+                                $routeParams.itemId = result.data.itemId;
                                 $location.url('view/' + result.data.itemId);
                             }
                         });
