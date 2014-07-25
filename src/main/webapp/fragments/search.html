@@ -1,15 +1,15 @@
 <div class="row" ng-show="items.length == 0">
     <div class="col-md-offset-1 col-md-10">
-        <h2>No results found for {{searchQuery}}</h2>
+        <h2>No results found for {{ searchQuery }} {{ searchBarcode }}</h2>
     </div>
 
     <div class="col-md-offset-3 col-md-6">
-        <p><strong>do you want to <a href="#/edit/?name={{searchQuery}}">create it</a> ?</strong></p>
+        <p><strong>do you want to <a href="#/edit/?name={{ searchQuery }}&barcode={{ searchBarcode }}">create it</a> ?</strong></p>
     </div>
 </div>
 <div class="row" ng-show="items.length > 0">
     <div class="col-md-offset-1 col-md-10">
-        <h2>Results for {{searchQuery}} ({{ items.length }}):</h2>
+        <h2>Results for {{ searchQuery }} ({{ items.length }}):</h2>
     </div>
 
     <div class="col-md-offset-3 col-md-6" ng-repeat="item in items" ng-click="view(item._id)">

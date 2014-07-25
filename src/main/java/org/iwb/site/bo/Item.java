@@ -13,6 +13,8 @@ public class Item extends ItemEssentials {
 
     private String barcode;
 
+    private String manufacturer;
+
     private String materialId;
 
     private Material material;
@@ -144,5 +146,23 @@ public class Item extends ItemEssentials {
      */
     public Trash getTrash() {
         return trash;
+    }
+
+    /**
+     * Sets new manufacturer.
+     *
+     * @param manufacturer New value of manufacturer.
+     */
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    /**
+     * Gets manufacturer.
+     *
+     * @return Value of manufacturer.
+     */
+    public String getManufacturer() {
+        return manufacturer;
     }
 }
