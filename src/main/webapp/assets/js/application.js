@@ -30,6 +30,12 @@ iwbApplication.directive('ngVisible', function () {
             element.css('visibility', visible ? 'visible' : 'hidden');
         });
     };
-})
+});
+
+$(document).ready(function () {
+    $(".navbar-nav li a").click(function(event) {
+        $(".navbar-collapse").collapse('hide');
+    });
+});
 
 
