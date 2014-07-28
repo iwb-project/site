@@ -11,9 +11,23 @@
             <div class="form-group">
                 <label for="itemBarcodeInput" class="col-sm-2 control-label">Barcode</label>
 
-                <div class="col-sm-2">
-                    <input type="text" class="form-control" placeholder="Barcode" maxlength="13" ng-model="item.barcode"
-                           id="itemBarcodeInput">
+                <div class="col-sm-4">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Barcode" maxlength="13"
+                               ng-model="item.barcode"
+                               id="itemBarcodeInput">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" ng-click="launchIntentForScanning($event, 'itemBarcodeInput')">
+                                &nbsp;<span class="glyphicon glyphicon-barcode"></span>&nbsp;
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <label for="itemManufacturerInput" class="col-sm-2 control-label">Barcode</label>
+
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" placeholder="Manufacturer" ng-model="item.manufacturer"
+                           id="itemManufacturerInput">
                 </div>
             </div>
 

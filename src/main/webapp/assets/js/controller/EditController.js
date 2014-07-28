@@ -1,11 +1,18 @@
 'use strict';
 
 angular.module('iwbApplication').controller('editController',
-    ['$scope', '$location', '$routeParams', 'itemService', 'materialService',
-        function ($scope, $location, $routeParams, itemService, materialService) {
+    ['$scope', '$location', '$routeParams', 'itemService', 'materialService', '$cookies',
+        function ($scope, $location, $routeParams, itemService, materialService, $cookies) {
             $scope.name = 'editController';
             console.log("editing")
             $scope.itemId = $routeParams.itemId;
+
+            $scope.launchIntentForScanning = function (event, targetId) {
+                console.log('scanning...');
+                $cookies.itemBeingAdded = JSON.stringify($scope.item);
+                var callbackUrl = encodeURIComponent($location.absUrl().replace(/\/#\/.*/, '/#/edit/?bfs=true&barcode={CODE}'));
+                window.location.assign('http://zxing.appspot.com/scan?ret=' + callbackUrl);
+            }
 
             $scope.addComponent = function () {
                 $scope.item.components.push({});
@@ -56,21 +63,28 @@ angular.module('iwbApplication').controller('editController',
             $scope.loadMaterials();
 
             if ($scope.itemId != undefined) {
+
                 $scope.loadItem();
             } else {
-                // new empty
-                $scope.item = {
-                    _id: null,
-                    name: "",
-                    barcode: "",
-                    materialId: null,
-                    components: []
-                };
-                if (($location.search()).name != null) {
-                    $scope.item.name = ($location.search()).name;
-                }
-                if (($location.search()).barcode != null) {
-                    $scope.item.barcode = ($location.search()).barcode;
+                if ($routeParams.bfs == 'true') {
+                    $scope.item = JSON.parse($cookies.itemBeingAdded);
+                    $scope.item.barcode = $routeParams.barcode;
+                    $cookies.itemBeingAdded = null;
+                } else {
+                    // new empty
+                    $scope.item = {
+                        _id: null,
+                        name: "",
+                        barcode: "",
+                        materialId: null,
+                        components: []
+                    };
+                    if (($location.search()).name != null) {
+                        $scope.item.name = ($location.search()).name;
+                    }
+                    if (($location.search()).barcode != null) {
+                        $scope.item.barcode = ($location.search()).barcode;
+                    }
                 }
             }
 
