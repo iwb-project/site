@@ -4,7 +4,6 @@ angular.module('iwbApplication').controller('editController',
     ['$scope', '$location', '$routeParams', 'itemService', 'materialService', '$cookies',
         function ($scope, $location, $routeParams, itemService, materialService, $cookies) {
             $scope.name = 'editController';
-            console.log("editing")
             $scope.itemId = $routeParams.itemId;
 
             $scope.launchIntentForScanning = function (event, targetId) {
