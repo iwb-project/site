@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row row-spacer">
     <div class="col-md-offset-1 col-md-10">
         <form class="form-horizontal" role="form">
             <div class="form-group">
@@ -17,13 +17,14 @@
                                ng-model="item.barcode"
                                id="itemBarcodeInput">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" ng-click="launchIntentForScanning($event, 'itemBarcodeInput')">
+                            <button class="btn btn-default" type="button"
+                                    ng-click="launchIntentForScanning($event, 'itemBarcodeInput')">
                                 &nbsp;<span class="glyphicon glyphicon-barcode"></span>&nbsp;
                             </button>
                         </span>
                     </div>
                 </div>
-                <label for="itemManufacturerInput" class="col-sm-2 control-label">Barcode</label>
+                <label for="itemManufacturerInput" class="col-sm-2 control-label">Manufacturer</label>
 
                 <div class="col-sm-4">
                     <input type="text" class="form-control" placeholder="Manufacturer" ng-model="item.manufacturer"
@@ -35,16 +36,15 @@
                 <label for="itemMaterialInput" class="col-sm-2 control-label">Material</label>
 
                 <div class="col-sm-4">
-                    <select class="form-control" id="itemMaterialInput" ng-model="item.materialId">
-                        <option ng-repeat="material in materials" value="{{ material._id }}">
-                            {{ material.description }}
-                        </option>
+                    <select class="form-control" id="itemMaterialInput" ng-model="item.materialId"
+                            ng-options="material._id as material.description for material in materials">
                     </select>
                 </div>
             </div>
         </form>
     </div>
-
+</div>
+<div class="row row-spacer">
     <div class="col-md-offset-1 col-md-10 text-right">
         <button class="btn btn-default" ng-click="addComponent()">
             <span class="glyphicon glyphicon-plus"></span> Add component
@@ -53,21 +53,20 @@
             <span class="glyphicon glyphicon-floppy-disk"></span> Save
         </button>
     </div>
-
-    <div class="col-md-offset-1 col-md-10">
-        <form class="form-inline" role="form" ng-repeat="component in item.components">
-            <div class="form-group">
+</div>
+<div class="row row-spacer">
+    <div class="col-md-offset-2 col-md-9">
+        <form class="form-inline row-spacer" role="form" ng-repeat="component in item.components">
+            <div class="form-group col-md-6">
                 <label class="sr-only" for="component_{{ $index }}_name">Name</label>
                 <input type="text" class="form-control" placeholder="Name" ng-model="component.name"
                        id="component_{{ $index }}_name">
             </div>
-            <div class="form-group">
-                <label class="sr-only" for="component_{{ $index }}_material">Material</label>
-                <select class="form-control" ng-model="component.materialId" id="component_{{ $index }}_material">
-                    <option ng-repeat="material in materials" value="{{ material._id }}">
-                        {{ material.description }}
-                    </option>
+            <div class="form-group col-md-6">
+                <select class="form-control" ng-model="component.materialId" id="component_{{ $index }}_material"
+                        ng-options="material._id as material.description for material in materials">
                 </select>
+
                 <button class="btn btn-warning" ng-click="removeComponent($index)"><span
                         class="glyphicon glyphicon-minus"></span></button>
             </div>

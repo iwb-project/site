@@ -20,6 +20,8 @@ angular.module('iwbApplication').controller('searchController', ['$scope', '$loc
             }
             aggregatedSearchQuery += $scope.searchBarcode;
         }
+        $scope.encodedSearchQuery = encodeURIComponent($scope.searchQuery);
+
         $scope.items = [];
 
         $scope.search = function () {

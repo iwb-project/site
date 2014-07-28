@@ -30,6 +30,7 @@ angular.module('iwbApplication').controller('editController',
 
             $scope.storeItem = function () {
                 if ($scope.item._id == null) {
+                    console.log('storing new item...');
                     itemService.create($scope.item)
                         .then(function (result) {
                             if (result.data.error != null) {
@@ -40,6 +41,7 @@ angular.module('iwbApplication').controller('editController',
                             }
                         });
                 } else {
+                    console.log('updating item...');
                     itemService.update($scope.itemId, $scope.item)
                         .then(function (result) {
                             if (result.data.error != null) {
@@ -62,14 +64,16 @@ angular.module('iwbApplication').controller('editController',
             $scope.loadMaterials();
 
             if ($scope.itemId != undefined) {
-
+                console.log('loading existing item');
                 $scope.loadItem();
             } else {
                 if ($routeParams.bfs == 'true') {
+                    console.log('back from scanning...');
                     $scope.item = JSON.parse($cookies.itemBeingAdded);
                     $scope.item.barcode = $routeParams.barcode;
                     $cookies.itemBeingAdded = null;
                 } else {
+                    console.log('new fresh item...');
                     // new empty
                     $scope.item = {
                         _id: null,
@@ -78,12 +82,10 @@ angular.module('iwbApplication').controller('editController',
                         materialId: null,
                         components: []
                     };
-                    if (($location.search()).name != null) {
-                        $scope.item.name = ($location.search()).name;
-                    }
-                    if (($location.search()).barcode != null) {
-                        $scope.item.barcode = ($location.search()).barcode;
-                    }
+                    console.log('w/ name ' + ($location.search()).name);
+                    $scope.item.name = ($location.search()).name;
+                    console.log('w/ barcode ' + ($location.search()).barcode);
+                    $scope.item.barcode = ($location.search()).barcode;
                 }
             }
 

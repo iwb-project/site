@@ -8,6 +8,10 @@ body > #application { height: auto; min-height: 100%; }
 
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
+.row-spacer {
+    margin-bottom: 15px;
+}
+
 .my-green {
     color: #6db33f;
 }
