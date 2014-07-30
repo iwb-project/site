@@ -134,7 +134,7 @@ public class BootstrapDataController {
         this.materialRepository.save(new Material("NON-RECYCLABLE", "Déchet non recyclable"));
         this.materialRepository.save(new Material("COMPOST", "Déchet végétal"));
         this.materialRepository.save(new Material("PLASTIC", "Plastique recyclable"));
-        this.materialRepository.save(new Material("TOXIC", "Déchet toxic necessitant un traitement particulier"));
+        this.materialRepository.save(new Material("TOXIC", "Déchet toxic"));
         this.materialRepository.save(new Material("MEDICAL", "Déchet médical"));
         this.materialRepository.save(new Material("GLASS", "Verre"));
         this.materialRepository.save(new Material("TEXTILE", "Déchet textile"));

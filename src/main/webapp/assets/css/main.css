@@ -3,10 +3,18 @@ body {
     padding-top: 70px;
 }
 
-html, body, #application { height: 100%; }
-body > #application { height: auto; min-height: 100%; }
+html, body, #application {
+    height: 100%;
+}
 
-.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+body > #application {
+    height: auto;
+    min-height: 100%;
+}
+
+.nav, .pagination, .carousel, .panel-title a {
+    cursor: pointer;
+}
 
 .row-spacer {
     margin-bottom: 15px;
@@ -46,6 +54,14 @@ body > #application { height: auto; min-height: 100%; }
 
 .trash-brawn {
     color: #925400;
+}
+
+.show-cell {
+    background-color: #6db33f;
+}
+
+.drop-image-here {
+    border: 3px dashed #6db33f;
 }
 
 .footer {
