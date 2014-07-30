@@ -14,6 +14,10 @@ angular.module('iwbApplication').controller('viewController', ['$scope', '$locat
             itemService.get($scope.itemId)
                 .then(function (result) {
                     $scope.item = result.data;
+                    if ($scope.item.barcode != undefined) {
+                        // load the barcode
+                        $('#itemBarcodeImage')[0].src = '/barcode/' + $scope.item.barcode;
+                    }
                 });
         }
 
