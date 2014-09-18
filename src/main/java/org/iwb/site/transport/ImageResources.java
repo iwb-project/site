@@ -20,7 +20,6 @@ public class ImageResources {
 
 
     @RequestMapping(value = "upload", method = RequestMethod.GET)
-    @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String prepare(
             @RequestParam("flowChunkNumber") int flowChunkNumber,
@@ -37,7 +36,6 @@ public class ImageResources {
     }
 
     @RequestMapping(value = "upload", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @ResponseBody
     public String uploadChunk(
             @RequestParam(value = "flowChunkNumber", required = false) Integer flowChunkNumber,
             @RequestParam(value = "flowChunkSize", required = false) Long flowChunkSize,

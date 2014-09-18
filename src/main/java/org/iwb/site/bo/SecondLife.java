@@ -10,11 +10,6 @@ import org.jongo.marshall.jackson.oid.ObjectId;
  */
 public class SecondLife {
 
-    @Id
-    private String _id;
-
-    private Long locationId;
-
     private Long trashId;
 
     private String materialId;
@@ -26,8 +21,7 @@ public class SecondLife {
         // void
     }
 
-    public SecondLife(Long locationId, String materialId, Long trashId) {
-        this.locationId = locationId;
+    public SecondLife(final String materialId, final Long trashId) {
         this.materialId = materialId;
         this.trashId = trashId;
     }
@@ -46,27 +40,8 @@ public class SecondLife {
      *
      * @param materialId New value of materialId.
      */
-    public void setMaterialId(String materialId) {
+    public void setMaterialId(final String materialId) {
         this.materialId = materialId;
-    }
-
-    /**
-     * Sets new locationId.
-     *
-     * @param locationId New value of locationId.
-     */
-    public void setLocationId(Long locationId) {
-        this.locationId = locationId;
-    }
-
-
-    /**
-     * Gets locationId.
-     *
-     * @return Value of locationId.
-     */
-    public Long getLocationId() {
-        return locationId;
     }
 
     /**
@@ -83,7 +58,7 @@ public class SecondLife {
      *
      * @param trashId New value of trashId.
      */
-    public void setTrashId(Long trashId) {
+    public void setTrashId(final Long trashId) {
         this.trashId = trashId;
     }
 }

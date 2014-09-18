@@ -12,6 +12,10 @@ body > #application {
     min-height: 100%;
 }
 
+.valign-middle {
+    vertical-align: middle;
+}
+
 .nav, .pagination, .carousel, .panel-title a {
     cursor: pointer;
 }

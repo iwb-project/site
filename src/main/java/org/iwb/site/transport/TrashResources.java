@@ -18,19 +18,16 @@ public class TrashResources {
     private TrashService service;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    @ResponseBody
     public Iterable<Trash> listTrashes() {
         return this.service.findAll();
     }
 
     @RequestMapping(value = "/{trashId}", method = RequestMethod.GET)
-    @ResponseBody
     public Trash findTrashById(@PathVariable("trashId") final Long materialId) {
         return this.service.findTrashById(materialId);
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    @ResponseBody
     public Trash findTrashByLocationAndMaterial(
             @RequestParam("locationId") final Long locationId,
             @RequestParam("materialId") final String materialId) {

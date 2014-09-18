@@ -14,9 +14,7 @@ public class Trash {
     @Id
     private Long id;
 
-    private String icon;
-
-    private String color;
+    private String name;
 
     private String snippet;
 
@@ -27,13 +25,9 @@ public class Trash {
         // void
     }
 
-    public Trash(final String snippet) {
+    public Trash(final String name, final String snippet) {
+        this.name = name;
         this.snippet = snippet;
-    }
-
-    public Trash(final String icon, final String color) {
-        this.icon = icon;
-        this.color = color;
     }
 
     public Long getId() {
@@ -42,42 +36,6 @@ public class Trash {
 
     public void setId(final Long id) {
         this.id = id;
-    }
-
-    /**
-     * Gets color.
-     *
-     * @return Value of color.
-     */
-    public String getColor() {
-        return color;
-    }
-
-    /**
-     * Sets new icon.
-     *
-     * @param icon New value of icon.
-     */
-    public void setIcon(final String icon) {
-        this.icon = icon;
-    }
-
-    /**
-     * Sets new color.
-     *
-     * @param color New value of color.
-     */
-    public void setColor(final String color) {
-        this.color = color;
-    }
-
-    /**
-     * Gets icon.
-     *
-     * @return Value of icon.
-     */
-    public String getIcon() {
-        return icon;
     }
 
     /**
@@ -96,5 +54,23 @@ public class Trash {
      */
     public String getSnippet() {
         return snippet;
+    }
+
+    /**
+     * Sets new name.
+     *
+     * @param name New value of name.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Gets name.
+     *
+     * @return Value of name.
+     */
+    public String getName() {
+        return name;
     }
 }

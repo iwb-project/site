@@ -92,8 +92,8 @@ public class ApplicationConfiguration {
     }
 
     @Bean
-    public MongoCollection secondLivesCollection() throws UnknownHostException {
-        return jongo().getCollection("secondLives");
+    public MongoCollection areasCollection() throws UnknownHostException {
+        return jongo().getCollection("areas");
     }
 
 }

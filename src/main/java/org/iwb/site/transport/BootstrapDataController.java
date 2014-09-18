@@ -7,6 +7,7 @@ import org.iwb.site.repository.LocationRepository;
 import org.iwb.site.repository.MaterialRepository;
 import org.iwb.site.repository.SecondLifeRepository;
 import org.iwb.site.repository.TrashRepository;
+import org.iwb.site.service.AreaService;
 import org.iwb.site.service.ItemService;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
@@ -19,9 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * TODO document me
@@ -34,6 +33,20 @@ public class BootstrapDataController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BootstrapDataController.class);
 
+    public static final String NON_RECYCLABLE = "NON-RECYCLABLE";
+    public static final String COMPOST = "COMPOST";
+    public static final String PLASTIC = "PLASTIC";
+    public static final String TOXIC = "TOXIC";
+    public static final String MEDICAL = "MEDICAL";
+    public static final String GLASS = "GLASS";
+    public static final String TEXTILE = "TEXTILE";
+    public static final String PAPER = "PAPER";
+    public static final String CARTON = "CARTON";
+    public static final String ELECTRONIC = "ELECTRONIC";
+    public static final String FURNITURE = "FURNITURE";
+    public static final String METAL = "METAL";
+    public static final String WOOD = "WOOD";
+
     @Autowired
     private ItemService itemService;
 
@@ -44,10 +57,8 @@ public class BootstrapDataController {
     private TrashRepository trashRepository;
 
     @Autowired
-    private LocationRepository locationRepository;
+    private AreaService areaService;
 
-    @Autowired
-    private SecondLifeRepository secondLifeRepository;
 
     @Autowired
     private Jongo db;
@@ -58,8 +69,15 @@ public class BootstrapDataController {
     private Location rennes;
 
     private Trash trashYellow;
-    private Trash trashGray;
     private Trash compost;
+    private Trash specialCompost;
+    private Trash notRecyclable;
+    private Trash specialPaper;
+    private Trash verre;
+    private Trash pharmacie;
+    private Trash déchetterie;
+    private Trash incénration;
+    private Trash glasses;
 
     @RequestMapping("/db")
     public Map<String, Boolean> bootstrapDB(@RequestParam(value = "drop", defaultValue = "false") boolean drop) {
@@ -78,39 +96,99 @@ public class BootstrapDataController {
         result.put("loadMaterials", loadMaterials());
         result.put("loadItems", loadItems());
         result.put("loadTrashes", loadTrashes());
-        result.put("loadLocations", loadLocations());
-        result.put("loadSecondLives", loadSecondLives());
+        result.put("loadAreas", loadAreas());
 
         return result;
     }
 
-    private boolean loadSecondLives() {
-        this.secondLifeRepository.save(new SecondLife(35000L, "COMPOST", this.compost.getId()));
-        this.secondLifeRepository.save(new SecondLife(35000L, "PLASTIC", this.trashYellow.getId()));
-        this.secondLifeRepository.save(new SecondLife(35000L, "PAPER", this.trashYellow.getId()));
-        this.secondLifeRepository.save(new SecondLife(35000L, "GLASS", this.trashYellow.getId()));
-        this.secondLifeRepository.save(new SecondLife(35000L, "METAL", this.trashYellow.getId()));
-        this.secondLifeRepository.save(new SecondLife(35000L, "NON-RECYCLABLE", this.trashGray.getId()));
+    private boolean loadAreas() {
+        Area noRecylingArea = new Area();
+        noRecylingArea.setName("noRecyclingArea");
+        noRecylingArea.setSecondLives(noRecycling());
+        noRecylingArea.setAvailableTrashes(getTrashInUse(noRecylingArea.getSecondLives()));
+        noRecylingArea.setLocations(Arrays.asList(new Location(35000, "Rennes")));
+        this.areaService.save(noRecylingArea);
+
+        Area basicRecycling = new Area();
+        basicRecycling.setName("basicRecyclingArea");
+        basicRecycling.setSecondLives(basicRecycling());
+        basicRecycling.setAvailableTrashes(getTrashInUse(basicRecycling.getSecondLives()));
+        basicRecycling.setLocations(Arrays.asList(new Location(51100, "Reims")));
+        this.areaService.save(basicRecycling);
+
+        Area ultimateRecycling = new Area();
+        ultimateRecycling.setName("ultimateRecyclingArea");
+        ultimateRecycling.setSecondLives(ultimateRecycling());
+        ultimateRecycling.setAvailableTrashes(getTrashInUse(ultimateRecycling.getSecondLives()));
+        ultimateRecycling.setLocations(Arrays.asList(new Location(51100, "Reims")));
+        this.areaService.save(basicRecycling);
+
         return true;
     }
 
-    private boolean loadLocations() {
-        this.rennes = this.locationRepository.save(new Location(35000, "Rennes"));
-        this.locationRepository.save(new Location(35190, "Tinténiac"));
-        this.locationRepository.save(new Location(59000, "Lille"));
-        return true;
+    private Iterable<Long> getTrashInUse(Iterable<SecondLife> secondLives) {
+        Set<Long> inUse = new HashSet<>();
+        for (SecondLife secondLife : secondLives) {
+            inUse.add(secondLife.getTrashId());
+        }
+        return inUse;
+    }
+
+    private List<SecondLife> noRecycling() {
+        List<SecondLife> secondLives = new ArrayList<>();
+        for (Material material : materials()) {
+            secondLives.add(new SecondLife(material.getConstant(), this.notRecyclable.getId()));
+        }
+        return secondLives;
+    }
+
+    private List<SecondLife> basicRecycling() {
+        return Arrays.asList(
+                new SecondLife(NON_RECYCLABLE, this.notRecyclable.getId()),
+                new SecondLife(COMPOST, this.compost.getId()),
+                new SecondLife(PLASTIC, this.trashYellow.getId()),
+                new SecondLife(TOXIC, this.déchetterie.getId()),
+                new SecondLife(MEDICAL, this.pharmacie.getId()),
+                new SecondLife(GLASS, this.glasses.getId()),
+                new SecondLife(TEXTILE, this.notRecyclable.getId()),
+                new SecondLife(PAPER, this.trashYellow.getId()),
+                new SecondLife(CARTON, this.déchetterie.getId()),
+                new SecondLife(ELECTRONIC, this.déchetterie.getId()),
+                new SecondLife(FURNITURE, this.déchetterie.getId()),
+                new SecondLife(METAL, this.déchetterie.getId()),
+                new SecondLife(WOOD, this.déchetterie.getId())
+        );
+    }
+
+    private List<SecondLife> ultimateRecycling() {
+        return Arrays.asList(
+                new SecondLife(NON_RECYCLABLE, this.notRecyclable.getId()),
+                new SecondLife(COMPOST, this.specialCompost.getId()),
+                new SecondLife(PLASTIC, this.déchetterie.getId()),
+                new SecondLife(TOXIC, this.déchetterie.getId()),
+                new SecondLife(MEDICAL, this.pharmacie.getId()),
+                new SecondLife(GLASS, this.glasses.getId()),
+                new SecondLife(TEXTILE, this.notRecyclable.getId()),
+                new SecondLife(PAPER, this.specialPaper.getId()),
+                new SecondLife(CARTON, this.déchetterie.getId()),
+                new SecondLife(ELECTRONIC, this.déchetterie.getId()),
+                new SecondLife(FURNITURE, this.déchetterie.getId()),
+                new SecondLife(METAL, this.déchetterie.getId()),
+                new SecondLife(WOOD, this.déchetterie.getId())
+        );
     }
 
     private boolean loadTrashes() {
-        this.trashYellow = this.trashRepository.save(new Trash("glyphicon glyphicon-trash trash-yellow"));
-        this.trashRepository.save(new Trash("glyphicon glyphicon-trash trash-green"));
-        this.trashRepository.save(new Trash("glyphicon glyphicon-trash trash-black"));
-        this.trashRepository.save(new Trash("glyphicon glyphicon-trash trash-brawn"));
-        this.trashGray = this.trashRepository.save(new Trash("glyphicon glyphicon-trash trash-gray"));
-        this.compost = this.trashRepository.save(new Trash("glyphicon glyphicon-leaf trash-compost"));
-        this.trashRepository.save(new Trash("glyphicon glyphicon-download-alt trash-glass"));
-        this.trashRepository.save(new Trash("glyphicon glyphicon-download-alt trash-black"));
-        this.trashRepository.save(new Trash("glyphicon glyphicon-fire trash-yellow"));
+        this.trashYellow = this.trashRepository.save(new Trash("Recyclable jaune", "glyphicon glyphicon-trash trash-yellow"));
+        this.specialCompost = this.trashRepository.save(new Trash("Composte collecté", "glyphicon glyphicon-trash trash-green"));
+        this.notRecyclable = this.trashRepository.save(new Trash("Ordure ménagère", "glyphicon glyphicon-trash trash-gray"));
+        this.specialPaper = this.trashRepository.save(new Trash("Papier", "glyphicon glyphicon-trash trash-brawn"));
+        this.compost = this.trashRepository.save(new Trash("Composte", "glyphicon glyphicon-leaf trash-compost"));
+        this.verre = this.trashRepository.save(new Trash("Verre", "glyphicon glyphicon-download-alt trash-glass"));
+        this.pharmacie = this.trashRepository.save(new Trash("Pharmacie", "glyphicon glyphicon-plus-sign my-green"));
+        this.déchetterie = this.trashRepository.save(new Trash("Déchetterie", "glyphicon glyphicon-new-window my-green"));
+        this.incénration = this.trashRepository.save(new Trash("Incénration", "glyphicon glyphicon-fire my-yellow"));
+        this.glasses = this.trashRepository.save(new Trash("Bac à verre", "glyphicon glyphicon-edit my-blue"));
         return true;
     }
 
@@ -131,21 +209,26 @@ public class BootstrapDataController {
 
 
     private boolean loadMaterials() {
-        this.materialRepository.save(new Material("NON-RECYCLABLE", "Déchet non recyclable"));
-        this.materialRepository.save(new Material("COMPOST", "Déchet végétal"));
-        this.materialRepository.save(new Material("PLASTIC", "Plastique recyclable"));
-        this.materialRepository.save(new Material("TOXIC", "Déchet toxic"));
-        this.materialRepository.save(new Material("MEDICAL", "Déchet médical"));
-        this.materialRepository.save(new Material("GLASS", "Verre"));
-        this.materialRepository.save(new Material("TEXTILE", "Déchet textile"));
-        this.materialRepository.save(new Material("PAPER", "Papier"));
-        this.materialRepository.save(new Material("CARTON", "Carton"));
-        this.materialRepository.save(new Material("ELECTRONIC", "Déchet electronique"));
-        this.materialRepository.save(new Material("FURNITURE", "Déchet végétaux"));
-        this.materialRepository.save(new Material("METAL", "Métaux"));
-        this.materialRepository.save(new Material("WOOD", "Bois"));
-
+        for (Material material : materials()) {
+            this.materialRepository.save(material);
+        }
         return true;
+    }
+
+    private List<Material> materials() {
+        return Arrays.asList(new Material(NON_RECYCLABLE, "Déchet non recyclable"),
+                new Material(COMPOST, "Déchet végétal"),
+                new Material(PLASTIC, "Plastique recyclable"),
+                new Material(TOXIC, "Déchet toxic"),
+                new Material(MEDICAL, "Déchet médical"),
+                new Material(GLASS, "Verre"),
+                new Material(TEXTILE, "Déchet textile"),
+                new Material(PAPER, "Papier"),
+                new Material(CARTON, "Carton"),
+                new Material(ELECTRONIC, "Déchet electronique"),
+                new Material(FURNITURE, "Déchet végétaux"),
+                new Material(METAL, "Métaux"),
+                new Material(WOOD, "Bois"));
     }
 
 }

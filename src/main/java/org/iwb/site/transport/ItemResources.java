@@ -27,13 +27,11 @@ public class ItemResources {
     private ItemService service;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    @ResponseBody
     public Iterable<ItemEssentials> listItems() {
         return this.service.findAll();
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    @ResponseBody
     public Iterable<ItemEssentials> searchItems(@RequestParam("q") String query) {
         LOGGER.debug("searching for {}", query);
         return this.service.search(query);
@@ -41,13 +39,11 @@ public class ItemResources {
 
 
     @RequestMapping(value = "/{itemId}", method = RequestMethod.GET)
-    @ResponseBody
     public Item findItemById(@PathVariable("itemId") final Long itemId) {
         return this.service.findItemById(itemId);
     }
 
     @RequestMapping(value = "/{itemId}", method = RequestMethod.PUT)
-    @ResponseBody
     public Map<String, Object> update(@RequestBody Item item) {
         try {
             Item saved = this.service.save(item);
@@ -58,7 +54,6 @@ public class ItemResources {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    @ResponseBody
     public Map<String, Object> create(@RequestBody Item item) {
         return update(item);
     }

@@ -15,17 +15,9 @@ import org.springframework.stereotype.Repository;
 public class SecondLifeRepositoryImpl implements SecondLifeRepository {
 
     @Autowired
-    @Qualifier("secondLivesCollection")
+    @Qualifier("areasCollection")
     private MongoCollection collection;
 
-    @Autowired
-    private SequenceRepository sequences;
-
-
-    @Override
-    public Iterable<SecondLife> findAll() {
-        return this.collection.find().as(SecondLife.class);
-    }
 
     @Override
     public Long findSecondLifeByLocationAndMaterial(Long locationId, String materialId) {

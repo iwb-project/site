@@ -18,13 +18,11 @@ public class MaterialResources {
     private MaterialService service;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    @ResponseBody
     public Iterable<Material> listMaterials() {
         return this.service.findAll();
     }
 
     @RequestMapping(value = "/{materialId}", method = RequestMethod.GET)
-    @ResponseBody
     public Material findItemById(@PathVariable("materialId") final String materialId) {
         return this.service.findItemById(materialId);
     }
